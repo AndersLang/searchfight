@@ -1,3 +1,5 @@
 httpx
 click
 duckduckgo-search
+pytest
+pydantic
