@@ -1,5 +1,7 @@
-from searchfight.search_engines.google_engine import search
-
-
 def test_google_search():
-    assert search("lectures")
+    from search_engines.google_engine import search
+
+    answer = search("lectures")
+
+    assert answer.search_time
+    assert answer.hits
