@@ -1,14 +1,26 @@
 import click
 
-from search_engines.bing_engine import search as bing_search
-from search_engines.google_engine import search as google_search
-from search_engines.duck_duck_go_engine import search as duck_duck_go_search
+import search_engines.google_engine as ge
+import search_engines.duck_duck_go_engine as ddge
+
 
 @click.command()
-@click.option("--search-terms", default="John Doe", help="Terms to search for.")
+@click.option("-st", "--search-terms", help="Terms to search for.", multiple=True)
 def search_with_terms(search_terms: list) -> str | None:
-    
-    
 
-if __name__ == '__main__':
+    for search_term in search_terms:
+        google_res = ge.search(search_term)
+        ddg_res = ddge.search(search_term)
+        print(
+            f"""
+            ------------------------------------------------
+            Google result for: {search_term} : Search time: {google_res.search_time}. Hits: {google_res.hits}
+            ------------------------------------------------
+            DDG result for: {search_term} : Search time: {ddg_res.search_time}. Hits: {ddg_res.hits}
+            ------------------------------------------------
+        """
+        )
+
+
+if __name__ == "__main__":
     search_with_terms()
